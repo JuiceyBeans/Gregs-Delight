@@ -1,4 +1,4 @@
-package com.example.examplemod;
+package com.juiceybeans.gregsdelight;
 
 import com.gregtechceu.gtceu.api.GTCEuAPI;
 import com.gregtechceu.gtceu.api.data.chemical.material.event.MaterialEvent;
@@ -7,6 +7,8 @@ import com.gregtechceu.gtceu.api.data.chemical.material.event.PostMaterialEvent;
 import com.gregtechceu.gtceu.api.machine.MachineDefinition;
 import com.gregtechceu.gtceu.api.recipe.GTRecipeType;
 import com.gregtechceu.gtceu.api.registry.registrate.GTRegistrate;
+import com.juiceybeans.gregsdelight.common.data.GDItems;
+import com.juiceybeans.gregsdelight.common.data.GDTabs;
 import net.minecraft.client.Minecraft;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Items;
@@ -19,14 +21,19 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-@Mod(ExampleMod.MOD_ID)
-public class ExampleMod {
-    public static final String MOD_ID = "examplemod";
-    public static final Logger LOGGER = LogManager.getLogger();
-    public static GTRegistrate EXAMPLE_REGISTRATE = GTRegistrate.create(ExampleMod.MOD_ID);
+import static com.juiceybeans.gregsdelight.GregsDelight.MOD_ID;
 
-    public ExampleMod() {
+@Mod(GregsDelight.MOD_ID)
+public class GregsDelight {
+    public static final String MOD_ID = "gregsdelight";
+    public static final Logger LOGGER = LogManager.getLogger();
+    public static GTRegistrate GD_REGISTRATE = GTRegistrate.create(MOD_ID);
+
+    public GregsDelight() {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
+
+        GDItems.init();
+        GDTabs.init();
 
         modEventBus.addListener(this::commonSetup);
         modEventBus.addListener(this::clientSetup);
@@ -40,23 +47,28 @@ public class ExampleMod {
         // If we want to use annotations to register event listeners,
         // we need to register our object like this!
         MinecraftForge.EVENT_BUS.register(this);
+        GD_REGISTRATE.registerRegistrate();
+    }
+
+    public static ResourceLocation id(String path) {
+        return new ResourceLocation(MOD_ID, path);
     }
 
     private void commonSetup(final FMLCommonSetupEvent event) {
         event.enqueueWork(() -> {
-            LOGGER.info("Hello from common setup! This is *after* registries are done, so we can do this:");
-            LOGGER.info("Look, I found a {}!", Items.DIAMOND);
+            // LOGGER.info("Hello from common setup! This is *after* registries are done, so we can do this:");
+            // LOGGER.info("Look, I found a {}!", Items.DIAMOND);
         });
     }
 
     private void clientSetup(final FMLClientSetupEvent event) {
-        LOGGER.info("Hey, we're on Minecraft version {}!", Minecraft.getInstance().getLaunchedVersion());
+        // LOGGER.info("Hey, we're on Minecraft version {}!", Minecraft.getInstance().getLaunchedVersion());
     }
 
     // You MUST have this for custom materials.
     // Remember to register them not to GT's namespace, but your own.
     private void addMaterialRegistries(MaterialRegistryEvent event) {
-        GTCEuAPI.materialManager.createRegistry(ExampleMod.MOD_ID);
+        //GTCEuAPI.materialManager.createRegistry(MOD_ID);
     }
 
     // As well as this.
