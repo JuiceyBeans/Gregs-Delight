@@ -116,6 +116,10 @@ repositories {
 		name = "TerraformersMC"
 		url = "https://maven.terraformersmc.com/"
 	}
+    maven {
+        // AppleSkin
+        url "https://maven.ryanliptak.com/"
+    }
 }
 
 dependencies {
@@ -138,6 +142,7 @@ dependencies {
 
     modRuntimeOnly("dev.toma.configuration:configuration-forge-$project.minecraft_version:$project.configuration_version")
     modRuntimeOnly("mezz.jei:jei-$project.minecraft_version-forge:$project.jei_version") { transitive = false }
+    modRuntimeOnly ("squeek.appleskin:appleskin-forge:mc$project.minecraft_version-$project.appleskin_version")
     
     modRuntimeOnly ("dev.emi:emi-forge:$project.emi_version+$project.minecraft_version")
 

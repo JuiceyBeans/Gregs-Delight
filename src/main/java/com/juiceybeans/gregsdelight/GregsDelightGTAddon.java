@@ -3,6 +3,7 @@ package com.juiceybeans.gregsdelight;
 import com.gregtechceu.gtceu.api.addon.GTAddon;
 import com.gregtechceu.gtceu.api.addon.IGTAddon;
 import com.gregtechceu.gtceu.api.registry.registrate.GTRegistrate;
+import com.juiceybeans.gregsdelight.data.recipe.SkibidiRecipes;
 import net.minecraft.data.recipes.FinishedRecipe;
 
 import java.util.function.Consumer;
@@ -32,7 +33,7 @@ public class GregsDelightGTAddon implements IGTAddon {
 
     @Override
     public void addRecipes(Consumer<FinishedRecipe> provider) {
-        //CustomRecipes.init(provider);
+        SkibidiRecipes.init(provider);
     }
     
     // If you have custom ingredient types, uncomment this & change to match your capability.

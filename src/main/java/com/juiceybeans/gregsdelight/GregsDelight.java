@@ -9,6 +9,7 @@ import com.gregtechceu.gtceu.api.recipe.GTRecipeType;
 import com.gregtechceu.gtceu.api.registry.registrate.GTRegistrate;
 import com.juiceybeans.gregsdelight.common.data.GDItems;
 import com.juiceybeans.gregsdelight.common.data.GDTabs;
+import com.juiceybeans.gregsdelight.common.data.materials.GDFoods;
 import net.minecraft.client.Minecraft;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Items;
@@ -32,8 +33,9 @@ public class GregsDelight {
     public GregsDelight() {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
 
-        GDItems.init();
         GDTabs.init();
+        GDFoods.init();
+        GDItems.init();
 
         modEventBus.addListener(this::commonSetup);
         modEventBus.addListener(this::clientSetup);
